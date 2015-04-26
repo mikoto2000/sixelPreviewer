@@ -1,0 +1,44 @@
+sixelPreviewer
+==============
+
+Usage:
+------
+
+画像ソース(svg, ozcld) のあるディレクトリで、
+「sixelPreview.sh 拡張子(svg or ozcld)」を実行。
+
+上記コマンドを実行したディレクトリ以下の画像ソースを修正すると、
+sixelPreview を実行したターミナルに画像が表示されます。
+
+
+Requirements:
+-------------
+
+下記ツールを導入し、パスを通しておいてください。
+
+- [ImageMagick](http://www.imagemagick.org/)
+- [mattn/goemon](https://github.com/mattn/goemon)
+- [libsixel by saitoha](http://saitoha.github.io/libsixel/)
+
+
+Install:
+--------
+
+適当な場所にコピーして、パスを通してください。
+
+
+License:
+--------
+
+Copyright (C) 2015 mikoto2000
+
+This software is released under the MIT License, see LICENSE
+
+このソフトウェアは MIT ライセンスの下で公開されています。 LICENSE を参照してください。
+
+
+Author:
+-------
+
+mikoto2000 <mikoto2000@gmail.com>
+
