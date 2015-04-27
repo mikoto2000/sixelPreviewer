@@ -26,7 +26,6 @@ w_scale=`echo "${term_width}/${image_width}" | bc`
 h_scale=`echo "${term_height}/${image_height}" | bc`
 
 if [ $w_scale -lt $h_scale ]; then
-sed s/\.[0-9,]*$//g
     size_opt="--width=`echo \"${term_width}*${out_scale}\" | bc | sed s/\.[0-9,]*$//g`"
 else
     size_opt="--height=`echo \"${term_height}*${out_scale}\" | bc | sed s/\.[0-9,]*$//g`"
