@@ -13,7 +13,9 @@ out_scale=0.9
 
 read -r rows char_of_row term_width term_height <<< "`termsize.py ${run_tty}`"
 
-if [ "${ext}" = "svg" ]; then
+if [ "${ext}" = "png" -o "${ext}" = "jpg" -o "${ext}" = "gif" ]; then
+    cp ${1} /tmp/tmp.${ext}
+elif [ "${ext}" = "svg" ]; then
     convert ${1} /tmp/tmp.png
 elif [ "${ext}" = "ozcld" ]; then
     ozcld ${1} > /tmp/tmp.dot
