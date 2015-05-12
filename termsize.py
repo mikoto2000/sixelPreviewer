@@ -34,13 +34,13 @@ def getTermSize(ptsPath) :
 if __name__ == "__main__" :
 
     if len(sys.argv) != 2 :
-        print __USEAGE__
+        print(__USEAGE__)
         exit()
 
     if sys.argv[1] == "--help"\
         or sys.argv[1] == "-h" :
-        print __USEAGE__
+        print(__USEAGE__)
         exit()
 
     termSize = getTermSize(sys.argv[1])
-    print termSize[0], termSize[1], termSize[2], termSize[3]
+    print(termSize[0], termSize[1], termSize[2], termSize[3])
