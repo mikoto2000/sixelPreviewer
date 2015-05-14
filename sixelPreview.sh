@@ -25,3 +25,6 @@ PS1="" /bin/bash --norc
 
 # goemon 停止
 killall goemon
+
+# goemon 設定ファイル削除
+rm goemon.yml
