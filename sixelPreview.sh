@@ -21,7 +21,7 @@ goemon -- 2> /dev/null &
 export PREVIEW=yes
 
 # preview 用 bash の起動
-/bin/bash
+PS1="" /bin/bash --norc
 
 # goemon 停止
 killall goemon
