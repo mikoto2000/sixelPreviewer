@@ -4,11 +4,11 @@ sixelPreviewer
 Usage:
 ------
 
-画像ソース(svg, ozcld) のあるディレクトリで、
-「sixelPreview.sh 拡張子(svg or ozcld)」を実行。
+画像ソース のあるディレクトリで、
+「setupGoemonPreviewer.sh 拡張子」を実行。
 
 上記コマンドを実行したディレクトリ以下の画像ソースを修正すると、
-sixelPreview を実行したターミナルに画像が表示されます。
+setupGoemonPreviewer を実行したターミナルに画像が表示されます。
 
 
 Requirements:
@@ -19,6 +19,14 @@ Requirements:
 - [ImageMagick](http://www.imagemagick.org/)
 - [mattn/goemon](https://github.com/mattn/goemon)
 - [libsixel by saitoha](http://saitoha.github.io/libsixel/)
+
+Options:
+--------
+
+下記パッケージをインストールすると、 markdown のプレビューが出来るようになります。
+
+- [phantomjs](http://phantomjs.org)
+- [python-markdown](http://pythonhosted.org/Markdown/cli.html)
 
 
 Install:

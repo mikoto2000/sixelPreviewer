@@ -21,6 +21,11 @@ if [ "${ext}" = "png" -o "${ext}" = "jpg" -o "${ext}" = "gif" ]; then
     cp ${1} ${work_dir}/tmp.${ext}
 elif [ "${ext}" = "svg" ]; then
     convert ${1} ${work_dir}/tmp.png
+elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
+    echo '<html><head><meta charset="UTF-8" /></head><body>' > ${work_dir}/tmp.html
+    markdown_py ${1} >> ${work_dir}/tmp.html
+    echo '</body></html>' >> ${work_dir}/tmp.html
+    phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
 elif [ "${ext}" = "ozcld" ]; then
     ozcld ${1} > ${work_dir}/tmp.dot
     dot -T png ${work_dir}/tmp.dot -o ${work_dir}/tmp.png
