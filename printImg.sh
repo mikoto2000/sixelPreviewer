@@ -6,7 +6,39 @@
 # Useag:
 # printImg TARGET_IMG_FILE TARGET_PTS_PATH
 
-run_tty=${2}
+
+usage() {
+    echo "Useag: printImg [OPTIONS] TARGET_IMG_FILE TARGET_PTS_PATH"
+    echo
+    echo "Options:"
+    echo "  -h, --help : print help."
+    echo "  -w : fit width mode."
+    echo
+    exit 1
+}
+
+# オプション抽出
+for OPT in "$@"
+do
+    case "$OPT" in
+        '-h'|'--help' )
+            usage
+            exit 1
+            ;;
+        '-w' )
+            fit_width_mode="yes"
+            shift 1
+            ;;
+        *)
+            param+=( "$1" )
+            shift 1
+            ;;
+    esac
+done
+
+# オプション以外の抽出
+target_img_file=${param[0]}
+run_tty=${param[1]}
 
 # 作業ディレクトリ作成
 work_dir=/tmp/sixelPreviewer
@@ -18,16 +50,16 @@ out_scale=0.9
 read -r rows char_of_row term_width term_height <<< "`termsize.py ${run_tty}`"
 
 if [ "${ext}" = "png" -o "${ext}" = "jpg" -o "${ext}" = "gif" ]; then
-    cp ${1} ${work_dir}/tmp.${ext}
+    cp ${target_img_file} ${work_dir}/tmp.${ext}
 elif [ "${ext}" = "svg" ]; then
-    convert ${1} ${work_dir}/tmp.png
+    convert ${target_img_file} ${work_dir}/tmp.png
 elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
     echo '<html><head><meta charset="UTF-8" /></head><body>' > ${work_dir}/tmp.html
-    markdown_py ${1} >> ${work_dir}/tmp.html
+    markdown_py ${target_img_file} >> ${work_dir}/tmp.html
     echo '</body></html>' >> ${work_dir}/tmp.html
     phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
 elif [ "${ext}" = "ozcld" ]; then
-    ozcld ${1} > ${work_dir}/tmp.dot
+    ozcld ${target_img_file} > ${work_dir}/tmp.dot
     dot -T png ${work_dir}/tmp.dot -o ${work_dir}/tmp.png
 fi
 
@@ -36,7 +68,9 @@ read -r image_width image_height <<< `identify -format "%w %h" ${work_dir}/tmp.p
 w_scale=`echo "${term_width}/${image_width}" | bc`
 h_scale=`echo "${term_height}/${image_height}" | bc`
 
-if [ $w_scale -lt $h_scale ]; then
+if [ "$fit_width_mode" ]; then
+    size_opt="--width=`echo \"${term_width}\"`"
+elif [ "$fit_width_mode" -o  $w_scale -lt $h_scale ]; then
     size_opt="--width=`echo \"${term_width}*${out_scale}\" | bc | sed s/\.[0-9,]*$//g`"
 else
     size_opt="--height=`echo \"${term_height}*${out_scale}\" | bc | sed s/\.[0-9,]*$//g`"
