@@ -44,7 +44,7 @@ run_tty=${param[1]}
 work_dir=/tmp/sixelPreviewer
 mkdir -p ${work_dir}
 
-ext=${1##*.}
+ext=${param[0]##*.}
 out_scale=0.9
 
 read -r rows char_of_row term_width term_height <<< "`termsize.py ${run_tty}`"
