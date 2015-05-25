@@ -50,7 +50,7 @@ out_scale=0.9
 read -r rows char_of_row term_width term_height <<< "`termsize.py ${run_tty}`"
 
 if [ "${ext}" = "png" -o "${ext}" = "jpg" -o "${ext}" = "gif" ]; then
-    cp ${target_img_file} ${work_dir}/tmp.${ext}
+    convert ${target_img_file} ${work_dir}/tmp.png
 elif [ "${ext}" = "svg" ]; then
     convert ${target_img_file} ${work_dir}/tmp.png
 elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
