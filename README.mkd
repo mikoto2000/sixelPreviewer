@@ -14,19 +14,21 @@ setupGoemonPreviewer を実行したターミナルに画像が表示されま�
 Requirements:
 -------------
 
-下記ツールを導入し、パスを通しておいてください。
+下記ツールをインストールし、パスを通して下さい。
 
-- [ImageMagick](http://www.imagemagick.org/)
 - [mattn/goemon](https://github.com/mattn/goemon)
 - [libsixel by saitoha](http://saitoha.github.io/libsixel/)
 
-Options:
---------
+それぞれのファイルをプレビューするには、下記ツールが必要です。
+プレビューしたいものに応じて下記ツールを導入し、パスを通しておいてください。
 
-下記パッケージをインストールすると、 markdown のプレビューが出来るようになります。
-
-- [phantomjs](http://phantomjs.org)
-- [python-markdown](http://pythonhosted.org/Markdown/cli.html)
+- png, jpg, gif, svg
+    - [ImageMagick](http://www.imagemagick.org/)
+- markdown
+    - [PhantomJS](http://phantomjs.org)
+    - [python-markdown](http://pythonhosted.org/Markdown/cli.html)
+- ozcld
+    - [ozcld](https://github.com/mikoto2000/ozcld)
 
 
 Install:
