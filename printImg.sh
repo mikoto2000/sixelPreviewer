@@ -77,3 +77,11 @@ else
 fi
 
 img2sixel ${size_opt} ${work_dir}/tmp.png > ${run_tty}
+
+if [ -e "${work_dir}/tmp.png" ]; then
+    rm ${work_dir}/tmp.png
+fi
+
+if [ -e "${work_dir}/tmp.html" ]; then
+    rm ${work_dir}/tmp.html
+fi
