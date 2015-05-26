@@ -12,6 +12,7 @@ usage() {
     echo
     echo "Options:"
     echo "  -h, --help : print help."
+    echo "  -c, --css CSS_PATH : stylesheet path."
     echo "  -w : fit width mode."
     echo
     exit 1
@@ -24,6 +25,11 @@ do
         '-h'|'--help' )
             usage
             exit 1
+            ;;
+        '-c'|'--css' )
+            shift 1
+            css_path=${1}
+            shift 1
             ;;
         '-w' )
             fit_width_mode="yes"
@@ -54,7 +60,12 @@ if [ "${ext}" = "png" -o "${ext}" = "jpg" -o "${ext}" = "gif" ]; then
 elif [ "${ext}" = "svg" ]; then
     convert ${target_img_file} ${work_dir}/tmp.png
 elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
-    echo '<html><head><meta charset="UTF-8" /></head><body>' > ${work_dir}/tmp.html
+    echo '<html><head><meta charset="UTF-8" />' > ${work_dir}/tmp.html
+    # css が指定されていれば挿入する。
+    if [ "${css_path}" != "" ]; then
+        echo '<link rel="stylesheet" href="'${css_path}'"></link>' >> ${work_dir}/tmp.html
+    fi
+    echo '</head><body>' >> ${work_dir}/tmp.html
     markdown_py ${target_img_file} >> ${work_dir}/tmp.html
     echo '</body></html>' >> ${work_dir}/tmp.html
     phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
