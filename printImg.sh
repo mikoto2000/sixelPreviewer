@@ -4,11 +4,15 @@
 # 第二引数の PTS で表示する。
 #
 # Useag:
-# printImg TARGET_IMG_FILE TARGET_PTS_PATH
+# printImg TARGET_IMG_FILE [TARGET_PTS_PATH]
 
 
 usage() {
-    echo "Useag: printImg [OPTIONS] TARGET_IMG_FILE TARGET_PTS_PATH"
+    echo "Useag: printImg [OPTIONS] TARGET_IMG_FILE [TARGET_PTS_PATH]"
+    echo
+    echo "TARGET_PTS_PATH:"
+    echo "  Output image pts.(ex: /dev/pts/0, /dev/tty0)"
+    echo "  default : 'tty' command result."
     echo
     echo "Options:"
     echo "  -h, --help : print help."
@@ -44,7 +48,12 @@ done
 
 # オプション以外の抽出
 target_img_file=${param[0]}
-run_tty=${param[1]}
+
+if [ ${#param[@]} -lt 2 ]; then
+    run_tty=`tty`
+else
+    run_tty=${param[1]}
+fi
 
 # 作業ディレクトリ作成
 work_dir=/tmp/sixelPreviewer
