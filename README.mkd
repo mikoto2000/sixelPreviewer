@@ -24,7 +24,7 @@ Requirements:
 
 - png, jpg, gif, svg
     - [ImageMagick](http://www.imagemagick.org/)
-- markdown
+- html, markdown
     - [PhantomJS](http://phantomjs.org)
     - [python-markdown](http://pythonhosted.org/Markdown/cli.html)
 - ozcld

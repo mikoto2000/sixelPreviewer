@@ -12,7 +12,7 @@ usage() {
     echo
     echo "Options:"
     echo "  -h, --help : print help."
-    echo "  -c, --css CSS_PATH : stylesheet path."
+    echo "  -c, --css CSS_PATH : stylesheet path.(markdown only.)"
     echo "  -w : fit width mode."
     echo
     exit 1
@@ -59,6 +59,9 @@ if [ "${ext}" = "png" -o "${ext}" = "jpg" -o "${ext}" = "gif" ]; then
     convert ${target_img_file} ${work_dir}/tmp.png
 elif [ "${ext}" = "svg" ]; then
     convert ${target_img_file} ${work_dir}/tmp.png
+elif [ "${ext}" = "htm" -o "${ext}" = "html" ]; then
+    cp ${target_img_file} ${work_dir}/tmp.html
+    phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
 elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
     echo '<html><head><meta charset="UTF-8" />' > ${work_dir}/tmp.html
     # css が指定されていれば挿入する。
