@@ -4,23 +4,43 @@ sixelPreviewer
 Usage:
 ------
 
-画像ソース のあるディレクトリで、
-「setupGoemonPreviewer.sh 拡張子」を実行。
+Basic useage :
 
-上記コマンドを実行したディレクトリ以下の画像ソースを修正すると、
-setupGoemonPreviewer を実行したターミナルに画像が表示されます。
+    printImg TARGET_IMG_FILE [TARGET_PTS_PATH]
 
+Help :
+
+    Useag: printImg [OPTIONS] TARGET_IMG_FILE [TARGET_PTS_PATH]
+    
+    TARGET_PTS_PATH:
+      Output image pts.(ex: /dev/pts/0, /dev/tty0)
+      default : 'tty' command result.
+    
+    OPTIONS:
+      -h, --help : print help.
+      -c, --css CSS_PATH : stylesheet path.(markdown only.)
+      -w : fit width mode.
 
 Requirements:
 -------------
 
 下記ツールをインストールし、パスを通して下さい。
 
-- [mattn/goemon](https://github.com/mattn/goemon)
 - [libsixel by saitoha](http://saitoha.github.io/libsixel/)
+- [bc](http://www.gnu.org/software/bc/)
 
-それぞれのファイルをプレビューするには、下記ツールが必要です。
-プレビューしたいものに応じて下記ツールを導入し、パスを通しておいてください。
+Recommends:
+-----------
+
+追加でツールを導入すると、下記機能が追加されます。
+
+- 対応ファイル追加
+- リアルタイムプレビュー機能
+
+### 対応ファイル追加
+
+下記ツールを導入すると、プレビューできるファイルが増えます。
+プレビューしたいものに応じて下記ツールを導入し、パスを通してください。
 
 - png, jpg, gif, svg
     - [ImageMagick](http://www.imagemagick.org/)
@@ -30,6 +50,22 @@ Requirements:
 - ozcld
     - [ozcld](https://github.com/mikoto2000/ozcld)
 
+### リアルタイムプレビュー機能
+
+下記ツールをインストールしパスを通すと、
+リアルタイムプレビュー機能が使用できるようになります。
+
+- [mattn/goemon](https://github.com/mattn/goemon)
+
+### リアルタイムプレビュー機能の使い方
+
+画像ソース のあるディレクトリで、
+`sixelPreviewer.sh 拡張子`を実行。
+
+上記コマンドを実行したディレクトリ以下の画像ソースを修正すると、
+sixelPreviewer を実行したターミナルに画像が表示されます。
+
+プレビューを終了する場合には、 sixelPreviewer を実行したターミナルで `exit` してください。
 
 Install:
 --------
@@ -40,7 +76,7 @@ Install:
 License:
 --------
 
-Copyright (C) 2015 mikoto2000
+Copyright (C) 2016 mikoto2000
 
 This software is released under the MIT License, see LICENSE
 
