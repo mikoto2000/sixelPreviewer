@@ -75,7 +75,7 @@ elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
     echo '<html><head><meta charset="UTF-8" />' > ${work_dir}/tmp.html
     # css が指定されていれば挿入する。
     if [ "${css_path}" != "" ]; then
-        echo '<link rel="stylesheet" href="'${css_path}'"></link>' >> ${work_dir}/tmp.html
+        echo '<link rel="stylesheet" href="'file://`realpath ${css_path}`'"></link>' >> ${work_dir}/tmp.html
     fi
     echo '</head><body>' >> ${work_dir}/tmp.html
     markdown_py ${target_img_file} >> ${work_dir}/tmp.html
