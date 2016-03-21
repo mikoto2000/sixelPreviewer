@@ -23,9 +23,9 @@ usage() {
 }
 
 # オプション抽出
-for OPT in "$@"
+while [ -n "$1" ]
 do
-    case "$OPT" in
+    case "${1}" in
         '-h'|'--help' )
             usage
             exit 1
@@ -40,7 +40,7 @@ do
             shift 1
             ;;
         *)
-            param+=( "$1" )
+            param+=( "${1}" )
             shift 1
             ;;
     esac
