@@ -72,14 +72,23 @@ elif [ "${ext}" = "htm" -o "${ext}" = "html" ]; then
     cp ${target_img_file} ${work_dir}/tmp.html
     phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
 elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
-    echo '<html><head><meta charset="UTF-8" />' > ${work_dir}/tmp.html
-    # css が指定されていれば挿入する。
-    if [ "${css_path}" != "" ]; then
-        echo '<link rel="stylesheet" href="'file://`realpath ${css_path}`'"></link>' >> ${work_dir}/tmp.html
+    if type pandoc > /dev/null 2>&1; then
+        # css が指定されていれば設定する。
+        css_opt=''
+        if [ "${css_path}" != "" ]; then
+            css_opt="--css file://`realpath ${css_path}`"
+        fi
+        pandoc -i ${target_img_file} -o ${work_dir}/tmp.html -t html5 --standalone ${css_opt}
+    else
+        echo '<html><head><meta charset="UTF-8" />' > ${work_dir}/tmp.html
+        # css が指定されていれば挿入する。
+        if [ "${css_path}" != "" ]; then
+            echo '<link rel="stylesheet" href="'file://`realpath ${css_path}`'"></link>' >> ${work_dir}/tmp.html
+        fi
+        echo '</head><body>' >> ${work_dir}/tmp.html
+        markdown_py ${target_img_file} >> ${work_dir}/tmp.html
+        echo '</body></html>' >> ${work_dir}/tmp.html
     fi
-    echo '</head><body>' >> ${work_dir}/tmp.html
-    markdown_py ${target_img_file} >> ${work_dir}/tmp.html
-    echo '</body></html>' >> ${work_dir}/tmp.html
     phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
 elif [ "${ext}" = "ozcld" ]; then
     ozcld ${target_img_file} > ${work_dir}/tmp.dot
