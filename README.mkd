@@ -6,20 +6,24 @@ Usage:
 
 Basic useage :
 
-    printImg TARGET_IMG_FILE [TARGET_PTS_PATH]
+```sh
+printImg TARGET_IMG_FILE [TARGET_PTS_PATH]
+```
 
 Help :
 
-    Useag: printImg [OPTIONS] TARGET_IMG_FILE [TARGET_PTS_PATH]
-    
-    TARGET_PTS_PATH:
-      Output image pts.(ex: /dev/pts/0, /dev/tty0)
-      default : 'tty' command result.
-    
-    OPTIONS:
-      -h, --help : print help.
-      -c, --css CSS_PATH : stylesheet path.(markdown only.)
-      -w : fit width mode.
+```sh
+Useag: printImg [OPTIONS] TARGET_IMG_FILE [TARGET_PTS_PATH]
+
+TARGET_PTS_PATH:
+  Output image pts.(ex: /dev/pts/0, /dev/tty0)
+  default : 'tty' command result.
+
+OPTIONS:
+  -h, --help : print help.
+  -c, --css CSS_PATH : stylesheet path.(markdown only.)
+  -w : fit width mode.
+```
 
 Requirements:
 -------------
@@ -46,7 +50,7 @@ Recommends:
     - [ImageMagick](http://www.imagemagick.org/)
 - html, markdown
     - [PhantomJS](http://phantomjs.org)
-    - [python-markdown](http://pythonhosted.org/Markdown/cli.html)
+    - [Pandoc](http://pandoc.org) or [python-markdown](http://pythonhosted.org/Markdown/cli.html)
 - ozcld
     - [ozcld](https://github.com/mikoto2000/ozcld)
 
