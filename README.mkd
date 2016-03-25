@@ -1,6 +1,8 @@
 sixelPreviewer
 ==============
 
+指定された画像を sixel grapgics を使用して表示します。
+
 Usage:
 ------
 
@@ -32,6 +34,16 @@ Requirements:
 
 - [libsixel by saitoha](http://saitoha.github.io/libsixel/)
 - [bc](http://www.gnu.org/software/bc/)
+- [ImageMagick](http://www.imagemagick.org/)
+
+### 対応ファイル形式
+
+sixelPleviewer は、最小構成で、下記画像ファイルに対応しています。
+
+- png
+- jpg
+- gif
+- svg
 
 Recommends:
 -----------
@@ -46,8 +58,6 @@ Recommends:
 下記ツールを導入すると、プレビューできるファイルが増えます。
 プレビューしたいものに応じて下記ツールを導入し、パスを通してください。
 
-- png, jpg, gif, svg
-    - [ImageMagick](http://www.imagemagick.org/)
 - html, markdown
     - [PhantomJS](http://phantomjs.org)
     - [Pandoc](http://pandoc.org) or [python-markdown](http://pythonhosted.org/Markdown/cli.html)
