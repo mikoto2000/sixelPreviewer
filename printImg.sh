@@ -60,7 +60,7 @@ work_dir=/tmp/sixelPreviewer
 mkdir -p ${work_dir}
 
 ext=${param[0]##*.}
-out_scale=0.9
+out_scale=0.95
 
 read -r rows char_of_row term_width term_height <<< "`termsize.py ${run_tty}`"
 
@@ -76,9 +76,9 @@ elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
         # css が指定されていれば設定する。
         css_opt=''
         if [ "${css_path}" != "" ]; then
-            css_opt="--css file://`realpath ${css_path}`"
+            css_opt="--css `realpath ${css_path}`"
         fi
-        pandoc -i ${target_img_file} -o ${work_dir}/tmp.html -t html5 --standalone ${css_opt}
+        pandoc -i ${target_img_file} -o ${work_dir}/tmp.html -t html5 --standalone --self-contained ${css_opt}
     else
         echo '<html><head><meta charset="UTF-8" />' > ${work_dir}/tmp.html
         # css が指定されていれば挿入する。
@@ -95,20 +95,16 @@ elif [ "${ext}" = "ozcld" ]; then
     dot -T png ${work_dir}/tmp.dot -o ${work_dir}/tmp.png
 fi
 
-read -r image_width image_height <<< `identify -format "%w %h" ${work_dir}/tmp.png`
-
-w_scale=`echo "${term_width}/${image_width}" | bc`
-h_scale=`echo "${term_height}/${image_height}" | bc`
+width=`echo "${term_width}*${out_scale}" | bc`
+height=`echo "${term_height}*${out_scale}" | bc`
 
 if [ "$fit_width_mode" ]; then
-    size_opt="--width=`echo \"${term_width}\"`"
-elif [ "$fit_width_mode" -o  $w_scale -lt $h_scale ]; then
-    size_opt="--width=`echo \"${term_width}*${out_scale}\" | bc | sed s/\.[0-9,]*$//g`"
+    size_opt="-geometry ${width}"
 else
-    size_opt="--height=`echo \"${term_height}*${out_scale}\" | bc | sed s/\.[0-9,]*$//g`"
+    size_opt="-geometry ${width}x${height}"
 fi
 
-img2sixel ${size_opt} ${work_dir}/tmp.png > ${run_tty}
+convert ${size_opt} ${work_dir}/tmp.png sixel:- > ${run_tty}
 
 if [ -e "${work_dir}/tmp.png" ]; then
     rm ${work_dir}/tmp.png
@@ -117,3 +113,4 @@ fi
 if [ -e "${work_dir}/tmp.html" ]; then
     rm ${work_dir}/tmp.html
 fi
+

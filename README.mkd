@@ -32,9 +32,8 @@ Requirements:
 
 下記ツールをインストールし、パスを通して下さい。
 
-- [libsixel by saitoha](http://saitoha.github.io/libsixel/)
 - [bc](http://www.gnu.org/software/bc/)
-- [ImageMagick](http://www.imagemagick.org/)
+- [ImageMagick >= 6.8.9-9](http://www.imagemagick.org/)
 
 ### 対応ファイル形式
 
