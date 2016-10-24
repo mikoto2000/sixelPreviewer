@@ -33,6 +33,7 @@ Requirements:
 下記ツールをインストールし、パスを通して下さい。
 
 - [bc](http://www.gnu.org/software/bc/)
+- [python3](https://www.python.org/)
 - [ImageMagick >= 6.8.9-9](http://www.imagemagick.org/)
 
 ### 対応ファイル形式
@@ -59,6 +60,7 @@ Recommends:
 
 - html, markdown
     - [PhantomJS](http://phantomjs.org)
+    - [XVFB](https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml)
     - [Pandoc](http://pandoc.org) or [python-markdown](http://pythonhosted.org/Markdown/cli.html)
 - ozcld
     - [ozcld](https://github.com/mikoto2000/ozcld)
