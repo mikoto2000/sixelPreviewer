@@ -72,7 +72,7 @@ elif [ "${ext}" = "htm" -o "${ext}" = "html" ]; then
     cp ${target_img_file} ${work_dir}/tmp.html
     Xvfb :0 -screen 0 2048x1x24 &
     pid=`echo $!`
-    phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
+    DISPLAY=:0 phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
     kill ${pid} >/dev/null 2>&1
 elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
     if type pandoc > /dev/null 2>&1; then
@@ -94,7 +94,7 @@ elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
     fi
     Xvfb :0 -screen 0 2048x1x24 &
     pid=`echo $!`
-    phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
+    DISPLAY=:0 phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
     kill ${pid} >/dev/null 2>&1
 elif [ "${ext}" = "ozcld" ]; then
     ozcld ${target_img_file} > ${work_dir}/tmp.dot
