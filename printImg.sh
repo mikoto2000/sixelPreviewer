@@ -70,7 +70,10 @@ elif [ "${ext}" = "svg" ]; then
     convert ${target_img_file} ${work_dir}/tmp.png
 elif [ "${ext}" = "htm" -o "${ext}" = "html" ]; then
     cp ${target_img_file} ${work_dir}/tmp.html
+    Xvfb :0 -screen 0 2048x1x24 &
+    pid=`echo $!`
     phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
+    kill ${pid} >/dev/null 2>&1
 elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
     if type pandoc > /dev/null 2>&1; then
         # css が指定されていれば設定する。
@@ -89,7 +92,10 @@ elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
         markdown_py ${target_img_file} >> ${work_dir}/tmp.html
         echo '</body></html>' >> ${work_dir}/tmp.html
     fi
+    Xvfb :0 -screen 0 2048x1x24 &
+    pid=`echo $!`
     phantomjs `type -P sp_capture.js` ${work_dir}/tmp.html ${term_width} ${work_dir}/tmp.png
+    kill ${pid} >/dev/null 2>&1
 elif [ "${ext}" = "ozcld" ]; then
     ozcld ${target_img_file} > ${work_dir}/tmp.dot
     dot -T png ${work_dir}/tmp.dot -o ${work_dir}/tmp.png
