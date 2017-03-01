@@ -99,6 +99,13 @@ elif [ "${ext}" = "mkd" -o "${ext}" = "markdown" ]; then
 elif [ "${ext}" = "ozcld" ]; then
     ozcld ${target_img_file} > ${work_dir}/tmp.dot
     dot -T png ${work_dir}/tmp.dot -o ${work_dir}/tmp.png
+elif [ "${ext}" = "puml" ]; then
+    if type where > /dev/null 2>&1; then
+        plantuml_jar=`where plantuml.jar`
+    else
+        plantuml_jar=`whereis plantuml.jar | awk '{ print $2 }'`
+    fi
+    java -jar ${plantuml_jar} -charset UTF-8 ${target_img_file} -o ${work_dir}
 fi
 
 width=`echo "${term_width}*${out_scale}" | bc`

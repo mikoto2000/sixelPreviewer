@@ -64,6 +64,9 @@ Recommends:
     - [Pandoc](http://pandoc.org) or [python-markdown](http://pythonhosted.org/Markdown/cli.html)
 - ozcld
     - [ozcld](https://github.com/mikoto2000/ozcld)
+- plantuml
+    - [PlantUML](http://plantuml.com/)
+
 
 ### リアルタイムプレビュー機能
 
